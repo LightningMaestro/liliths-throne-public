@@ -72,6 +72,359 @@ public class PenisMouth {
 	
 	// ---
 	
+	public static final SexAction COCK_SLAP_FOREPLAY = new SexAction(
+			SexActionType.REQUIRES_EXPOSED,
+			ArousalIncrease.TWO_LOW,
+			ArousalIncrease.ONE_MINIMUM,
+			CorruptionLevel.THREE_DIRTY,
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			SexParticipantType.NORMAL,
+			SexPace.DOM_ROUGH) {
+		
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING
+					&& Main.sex.getPenetrationTypeFreeCount(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS)>=1;
+		}
+		@Override
+		public String getActionTitle() {
+			return "Cock slap (foreplay)";
+		}
+		@Override
+		public String getActionDescription() {
+			return "Slap [npc2.her] face with your [npc.cock] as foreplay.";
+		}
+		public String getDescription() {
+			GameCharacter performer = Main.sex.getCharacterPerformingAction();
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			return UtilText.parse(Util.newArrayListOfValues(performer, target),
+					UtilText.returnStringAtRandom(
+						"Grinning down at "+PenisMouth.getOngoingNames(performer)+", [npc.name] [npc.verb(move)] forwards, pushing [npc.her] [npc.cock+] against [npc2.namePos] mouth."
+							+ " As [npc2.name] [npc2.verb(look)] up at [npc.herHim], [npc.she] quickly [npc.verb(slap)] [npc.her] hard shaft against [npc2.her] cheek, "
+								+(Main.sex.hasLubricationTypeFromAnyone(target, SexAreaOrifice.MOUTH, LubricationType.SALIVA)?"splattering wet saliva":"leaving a red mark")
+								+" across [npc2.her] face.",
+
+						"[npc.name] [npc.verb(look)] down at [npc2.namePos] face, before [npc.she] [npc.verb(slap)] [npc.her] [npc1.cockHead] against [npc2.her] cheeks.",
+	
+						"[npc.Name] [npc.verb(shift)] forwards, allowing [npc.her] [npc.cock+] to rest against [npc2.namePos] mouth."
+							+ " Looking up at [npc.herHim], [npc2.nameIs] taken by surprise as [npc.name] suddenly [npc.verb(slap)] [npc.her] "
+								+(Main.sex.hasLubricationTypeFromAnyone(target, SexAreaOrifice.MOUTH, LubricationType.SALIVA)?"saliva-coated":"rock hard")+" cock against [npc2.her] face.",
+	
+						"[npc.Name] [npc.verb(hold)] the base of [npc.her] [npc.cock+] in one hand while holding [npc2.her] head still with the other."
+							+ " As [npc2.name] [npc2.verb(look)] up to see what's happening, [npc2.sheIs] met with a wet slap as [npc.name] [npc.verb(swing)] [npc.her] "
+								+(Main.sex.hasLubricationTypeFromAnyone(target, SexAreaOrifice.MOUTH, LubricationType.SALIVA)?"saliva-coated":"rock hard")+" [npc.cock] against [npc2.her] cheek.",
+
+						"Rocking [npc.her] [npc.hips] forwards, [npc.name] [npc.verb(slide)] [npc.her] [npc.cock+] against [npc2.namePos] [npc2.face]."
+							+ " Before [npc2.she] can react, [npc.she] quickly [npc.verb(slap)] [npc.her] hard shaft against [npc2.her] cheek, "
+							+(Main.sex.hasLubricationTypeFromAnyone(performer, SexAreaPenetration.PENIS, LubricationType.SALIVA)?"splattering saliva":"leaving a red mark")
+							+" across [npc2.her] [npc2.face].",
+	
+						"Moving forwards, [npc.name] [npc.verb(slide)] [npc.her] [npc.cock+] against [npc2.namePos] mouth,"
+								+ " and with [npc.a_moan+], [npc.she] [npc.verb(proceed)] to slap the"+(Main.sex.hasLubricationTypeFromAnyone(performer, SexAreaPenetration.PENIS, LubricationType.SALIVA)?"saliva-coated":"rock hard")
+								+" [npc.cockHead] against [npc2.her] [npc2.face].",
+	
+						"[npc.Name] [npc.verb(slide)] [npc.her] [npc.cock+] against [npc2.namePos] mouth, and, grinning to [npc.herself], [npc.she] then [npc.verb(slap)] [npc.her] hard shaft against [npc2.her] [npc2.face]."
+							+ " With a "+(Main.sex.hasLubricationTypeFromAnyone(performer, SexAreaPenetration.PENIS, LubricationType.SALIVA)?"streak of wet saliva now drooling down":"fresh red mark across")
+								+" [npc2.her] cheek, [npc2.name] [npc2.verb(open)] [npc2.her] [npc2.eyes] wide in surprise.",
+	
+						"Quickly moving [npc.her] [npc.hips+] forwards, [npc.name] [npc.verb(draw)] [npc.her] [npc.cock+] against [npc2.namePos] [npc2.face], before starting to slap [npc.her] "+(Main.sex.hasLubricationTypeFromAnyone(performer, SexAreaPenetration.PENIS, LubricationType.SALIVA)?"slimy":"rigid")
+						+" length against [npc2.her] cheeks."));
+		}
+	};
+	
+	public static final SexAction FORCE_BALLS_FOCUS_FOREPLAY = new SexAction(
+			SexActionType.REQUIRES_EXPOSED,
+			ArousalIncrease.THREE_NORMAL,
+			ArousalIncrease.ONE_MINIMUM,
+			CorruptionLevel.ONE_VANILLA,
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			SexParticipantType.NORMAL) {
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Main.sex.getCharacterTargetedForSexAction(this).isInternalTesticles()
+					&& Main.sex.getPenetrationTypeFreeCount(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS)>=1
+					&& Main.sex.isOrificeFree(Main.sex.getCharacterTargetedForSexAction(this), SexAreaOrifice.MOUTH)
+					&& Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING;
+		}
+		@Override
+		public String getActionTitle() {
+			return "Balls focus (foreplay)";
+		}
+		@Override
+		public String getActionDescription() {
+			return "Force [npc2.name] to pay some attention to your [npc.balls+] as foreplay.";
+		}
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+
+			GameCharacter performer = Main.sex.getCharacterPerformingAction();
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			int rnd = Util.random.nextInt(4);
+			
+			String[] mid = new String[] {};
+				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
+					case DOM_GENTLE:
+						mid = new String[] {
+								"[npc.Name] [npc.verb(shuffle)] about until [npc.her] [npc.balls+] are gently pressing against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc.her] [npc.balls+] are gently pressing against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc2.namePos] [npc2.lips+] are gently pressed against [npc.her] [npc.balls+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] until [npc.sheIs] gently pressing [npc.her] [npc.balls+] against [npc2.namePos] [npc2.lips+]."};
+						break;
+					case DOM_ROUGH:
+						mid = new String[] {
+								"[npc.Name] [npc.verb(shuffle)] about until [npc.her] [npc.balls+] are roughly grinding against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc.her] [npc.balls+] are roughly grinding against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc2.namePos] [npc2.lips+] are roughly grinding against [npc.her] [npc.balls+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] until [npc.sheIs] roughly forcing [npc.her] [npc.balls+] against [npc2.namePos] [npc2.lips+]."};
+						break;
+					case SUB_NORMAL:
+						mid = new String[] {
+								"[npc.Name] [npc.verb(shuffle)] about until [npc.her] [npc.balls+] are pressing down against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc.her] [npc.balls+] are pressing against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] so that [npc2.namePos] [npc2.lips+] are pressed against [npc.her] [npc.balls+].",
+								"[npc.Name] [npc.verb(reposition)] [npc.herself] until [npc.sheIs] forcing [npc.her] [npc.balls+] against [npc2.namePos] [npc2.lips+]."};
+						break;
+					default: // Dom normal and sub eager:
+						mid = new String[] {
+								"[npc.name] [npc.verb(shuffle)] about until [npc.her] [npc.balls+] are pressing against [npc2.namePos] [npc2.lips+].",
+								"[npc.name] [npc.verb(reposition)] [npc.herself] so that [npc.her] [npc.balls+] are pressing against [npc2.namePos] [npc2.lips+].",
+								"[npc.Name] [npc.verb(reposition)] so that [npc2.namePos] [npc2.lips+] are pressed against [npc.her] [npc.balls+].",
+								"[npc.name] [npc.verb(reposition)] [npc.herself] until [npc.sheIs] forcing [npc.her] [npc.balls+] against [npc2.namePos] [npc2.lips+]."};
+						break;
+				}
+				UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target),
+						mid[rnd]));
+
+			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
+				case DOM_GENTLE:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Slowly sliding [npc2.her] [npc2.tongue+] out, [npc2.name] [npc2.verb(start)] to gently lick and kiss [npc.namePos] [npc.balls+], causing [npc.a_moan+] to drift out from between [npc.her] [npc.lips+].",
+							" [npc2.Name] gently [npc2.verb(start)] to kiss and lick [npc.namePos] [npc.balls+], drawing [npc.a_moan+] from out of [npc.her] mouth."));
+					break;
+				case DOM_NORMAL:
+				case SUB_EAGER:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Eagerly darting [npc2.her] [npc2.tongue+] out, [npc2.name] greedily [npc2.verb(start)] to lick and kiss [npc.namePos] [npc.balls+], causing [npc.a_moan+] to drift out from between [npc.her] [npc.lips+].",
+							" [npc2.Name] eagerly [npc2.verb(start)] to kiss and lick [npc.namePos] [npc.balls+], drawing [npc.a_moan+] from out of [npc.her] mouth."));
+					break;
+				case DOM_ROUGH:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Sliding [npc2.her] [npc2.tongue+] out, [npc2.name] [npc2.verb(start)] to roughly lick and kiss [npc.namePos] [npc.balls+], causing [npc.a_moan+] to drift out from between [npc.her] [npc.lips+].",
+							" [npc2.Name] roughly [npc2.verb(start)] kissing and licking [npc.namePos] [npc.balls+], drawing [npc.a_moan+] from out of [npc.her] mouth."));
+					break;
+				case SUB_NORMAL:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Darting [npc2.her] [npc2.tongue+] out, [npc2.name] [npc2.verb(start)] to lick and kiss [npc.namePos] [npc.balls+], causing [npc.a_moan+] to drift out from between [npc.her] [npc.lips+].",
+							" [npc2.Name] [npc2.verb(start)] to kiss and lick [npc.namePos] [npc.balls+], drawing [npc.a_moan+] from out of [npc.her] mouth."));
+					break;
+				case SUB_RESISTING:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] desperately [npc2.verb(try)] to pull away, letting out [npc2.a_sob+] as [npc.namePos] [npc.balls+] [npc.verb(continue)] grinding against [npc2.her] [npc2.lips+].",
+							" [npc2.Name] [npc2.verb(let)] out a muffled [npc2.sob], trying desperately to pull away from [npc.namePos] [npc.balls+] as [npc2.she] [npc2.verb(struggle)] against [npc.herHim]."));
+					break;
+				default:
+					break;
+			
+			}
+			
+			return UtilText.nodeContentSB.toString();
+		}
+	};
+	
+	public static final SexAction LICK_HEAD_FOREPLAY = new SexAction(
+			SexActionType.REQUIRES_EXPOSED,
+			ArousalIncrease.TWO_LOW,
+			ArousalIncrease.THREE_NORMAL,
+			CorruptionLevel.ONE_VANILLA,
+			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			SexParticipantType.NORMAL) {
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING
+				&& Main.sex.getPenetrationTypeFreeCount(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS)>=1
+				&& Main.sex.isOrificeFree(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH);
+		}
+		@Override
+		public String getActionTitle() {
+			return "Lick head (foreplay)";
+		}
+		@Override
+		public String getActionDescription() {
+			return "Lick and kiss the [npc2.cockHead+] of [npc2.namePos] [npc2.cock+] as foreplay.";
+		}
+		@Override
+		public String getDescription() {
+
+			List<String> descriptions = new ArrayList<>();
+
+			GameCharacter performer = Main.sex.getCharacterPerformingAction();
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterTargetedForSexAction(this)).size()>1) {
+				List<String> descriptionsEnd = new ArrayList<>();
+				
+				for(PenetrationModifier pm : Main.sex.getCharacterTargetedForSexAction(this).getPenisModifiers()) {
+					switch(pm) {
+						case FLARED:
+							descriptions.add("Lifting [npc.namePos] head up so that [npc2.namePos] [npc2.cock+] comes to rest fully against [npc.her] mouth, [npc.name] quickly [npc.verb(move)] to take [npc.her] place."
+									+ " Immediately pressing [npc.her] [npc.lips+] down against the wide, flared head, [npc.she] then [npc.verb(start)] to passionately kiss and lick the top of [npc2.namePos] [npc2.cock+].");
+							break;
+						default:
+							break;
+					}
+				}
+				
+				return UtilText.parse(Util.newArrayListOfValues(performer, target),
+						Util.randomItemFrom(descriptions))
+						+ UtilText.parse(Util.newArrayListOfValues(performer, target),
+								Util.randomItemFrom(descriptionsEnd));
+				
+			} else {
+				for(PenetrationModifier pm : Main.sex.getCharacterTargetedForSexAction(this).getPenisModifiers()) {
+					switch(pm) {
+						case BARBED:
+							descriptions.add("[npc.Name] [npc.verb(slide)] [npc.her] head forwards, letting out a [npc.moan] as [npc.she] [npc.verb(feel)] the barbs lining [npc2.namePos] [npc2.cock] rake their way across [npc.her] [npc.face]."
+									+ " Leaving just the [npc2.cockHead+] pushed past [npc.her] [npc.lips+], [npc.she] then [npc.verb(start)] to passionately kiss and suck the tip of [npc2.her] [npc2.cock+].");
+							break;
+						case FLARED:
+							descriptions.add("Sliding [npc.her] head forwards, [npc.name] [npc.verb(allow)] [npc2.namePos] [npc2.cock+] to rest completely against [npc.her] [npc.face]."
+									+ " Immediately pressing [npc.her] [npc.lips+] down against the wide, flared head, [npc.she] then [npc.verb(start)] to passionately kiss and lick it.");
+							break;
+						default:
+							break;
+					}
+				}
+				descriptions.add("With [npc.a_moan+], [npc.name] [npc.verb(move)] [npc.her] head forwards, wrapping [npc.her] [npc.lips+] around the [npc2.cockHead+] of [npc2.namePos] [npc2.cock+], before starting to lick and kiss it.");
+				descriptions.add("[npc.Name] [npc.verb(move)] [npc.her] head forwards, letting out [npc.a_moan+] as [npc.she] [npc.verb(start)] concentrating on sucking and kissing the [npc2.cockHead+] of [npc2.namePos] [npc2.cock+].");
+				descriptions.add("Moving [npc.her] head forwards a little, [npc.name] [npc.verb(let)] a little of [npc2.namePos] [npc2.cock+] slide into [npc.her] mouth, and,"
+						+ " focusing on using [npc.her] [npc.tongue+], [npc.she] [npc.verb(start)] licking and kissing the [npc2.cockHead+] that's now poking past [npc.her] [npc.lips+].");
+				
+				return Util.randomItemFrom(descriptions);
+			}
+		}
+		@Override
+		public void applyEffects() {
+			Main.sex.transferLubrication(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH);
+		}
+	};
+	
+	public static final SexAction POLISH_PENIS = new SexAction(
+			SexActionType.REQUIRES_EXPOSED,
+			ArousalIncrease.THREE_NORMAL,
+			ArousalIncrease.FOUR_HIGH,
+			CorruptionLevel.THREE_DIRTY,
+			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			SexParticipantType.NORMAL) {
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING
+				&& Main.sex.getPenetrationTypeFreeCount(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS)>=1
+				&& Main.sex.hasLubricationTypeFromAnyone(Main.sex.getCharacterTargetedForSexAction(this),SexAreaPenetration.PENIS,LubricationType.CUM)
+				&& Main.sex.isOrificeFree(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH);
+		}
+		@Override
+		public String getActionTitle() {
+			return "Polish penis";
+		}
+		@Override
+		public String getActionDescription() {
+			return "Polish [npc2.namePos] entire [npc2.cock+] clean with your mouth.";
+		}
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			UtilText.nodeContentSB.append("[npc.Name] [npc.verb(lick)] clean the entirety of [npc2.namePos] [npc2.cock+], sucking and licking away across the entire length until it gleams with [npc.her] saliva.");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+		@Override
+		public void applyEffects() {
+			Main.sex.clearLubrication(Main.sex.getCharacterTargetedForSexAction(this),SexAreaPenetration.PENIS);
+			Main.sex.transferLubrication(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH);
+		}
+	};
+	
+	public static final SexAction SUCK_BALLS_FOREPLAY = new SexAction(
+			SexActionType.REQUIRES_EXPOSED,
+			ArousalIncrease.ONE_MINIMUM,
+			ArousalIncrease.THREE_NORMAL,
+			CorruptionLevel.ONE_VANILLA,
+			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			SexParticipantType.NORMAL) {
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return !Main.sex.getCharacterTargetedForSexAction(this).isInternalTesticles()
+					&& Main.sex.getPenetrationTypeFreeCount(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS)>=1
+					&& Main.sex.isOrificeFree(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH)
+					&& Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING;
+		}
+		@Override
+		public String getActionTitle() {
+			return "Suck balls (foreplay)";
+		}
+		@Override
+		public String getActionDescription() {
+			return "Lick and kiss [npc2.namePos] [npc2.balls] for a while as foreplay.";
+		}
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			GameCharacter performer = Main.sex.getCharacterPerformingAction();
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			int rnd = Util.random.nextInt(4);
+			
+			String[] start;
+			String[] mid = new String[] {};
+			
+			start = new String[] {
+					"Letting [npc2.namePos] [npc2.cock+] rest fully against [npc.her] [npc.face],",
+					"[npc.Name] [npc.verb(let)] [npc2.namePos] [npc2.cock+] rest against [npc.her] [npc.face],",
+					"Sliding [npc.her] mouth down the length of [npc2.namePos] [npc2.cock+],",
+					"First sliding [npc.her] mouth down [npc2.namePos] [npc2.cock+],"};
+			UtilText.nodeContentSB.append(start[rnd]);
+			
+			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
+				case DOM_GENTLE:
+					mid = new String[] {
+							" [npc.name] [npc.verb(move)] [npc.her] head down and [npc.verb(start)] to gently lick and suck on [npc2.her] [npc2.balls+].",
+							" before moving [npc.her] [npc.lips+] down to start gently licking and kissing [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down to start gently kissing and licking [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down, before starting to gently kiss and nuzzle into [npc2.her] [npc2.balls+]."};
+					break;
+				case DOM_ROUGH:
+					mid = new String[] {
+							" [npc.name] [npc.verb(move)] [npc.her] head down and [npc.verb(start)] to roughly lick and suck on [npc2.her] [npc2.balls+].",
+							" before moving [npc.her] [npc.lips+] down to start roughly licking and kissing [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down to start roughly kissing and licking [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down, before starting to roughly kiss and nuzzle into [npc2.her] [npc2.balls+]."};
+					break;
+				case SUB_NORMAL:
+					mid = new String[] {
+							" [npc.name] [npc.verb(move)] [npc.her] head down and [npc.verb(start)] to lick and suck on [npc2.her] [npc2.balls+].",
+							" before moving [npc.her] [npc.lips+] down to start licking and kissing [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down to start kissing and licking [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down, before starting to kiss and nuzzle into [npc2.her] [npc2.balls+]."};
+					break;
+				default: // Dom normal and sub eager:
+					mid = new String[] {
+							" [npc.name] [npc.verb(move)] [npc.her] head down and [npc.verb(start)] to eagerly lick and suck on [npc2.her] [npc2.balls+].",
+							" before moving [npc.her] [npc.lips+] down to start desperately licking and kissing [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down to start eagerly kissing and licking [npc2.her] [npc2.balls+].",
+							" [npc.name] [npc.verb(move)] [npc.her] head down, before starting to eagerly kiss and nuzzle into [npc2.her] [npc2.balls+]."};
+					break;
+			}
+			UtilText.nodeContentSB.append(UtilText.parse(performer, target, mid[rnd]));
+		
+			return UtilText.nodeContentSB.toString();
+		}
+	};
+	
 	public static final SexAction COCK_SLAP = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,

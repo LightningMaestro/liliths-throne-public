@@ -19,6 +19,7 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.GenericSexFlag;
+import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -1133,6 +1134,206 @@ public class GenericActions {
 		}
 	};
 	
+	public static final SexAction SWALLOW_CUM = new SexAction(
+			SexActionType.SPECIAL,
+			ArousalIncrease.THREE_NORMAL,
+			ArousalIncrease.THREE_NORMAL,
+			CorruptionLevel.TWO_HORNY,
+			null,
+			SexParticipantType.NORMAL) {
+		
+		@Override
+		public String getActionTitle() {
+			return "Swallow cum";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return "Swallow any and all cum in your mouth, cleaning it out.";
+		}
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			return Main.sex.hasLubricationTypeFromAnyone(Main.sex.getCharacterPerformingAction(),SexAreaOrifice.MOUTH,LubricationType.CUM)
+					&& Main.sex.isOrificeFree(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH);
+		}
+
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+					"[npc.Name] [npc.verb(swallow)] until all the cum in [npc.her] mouth is gone.",
+					"[npc.Name] greedily [npc.verb(drink)] every last bit of cum in [npc.her] mouth.",
+					"[npc.Name] [npc.verb(gulp)] down all the cum in [npc.her] mouth."));
+				UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+					" [npc.speech(Delicious,)] [npc.name] [npc.verb(tell)] [npc2.name], opening [npc.her] mouth for [npc2.him] to show every last drop gone.<br/><br/>",
+					" [npc.speech(So good,)] [npc.name] [npc.verb(tell)] [npc2.name], opening [npc.her] mouth with pride to reveal its clean state to [npc2.him].<br/><br/>",
+					" [npc.Name] silently [npc.verb(look)] at [npc2.name] proudly, displaying [npc.her] now-empty mouth to [npc2.him].<br/><br/>",
+					" [npc.speech(So tasty,)] [npc.name] [npc.verb(tell)] [npc2.name], presenting [npc.her] empty mouth to [npc2.him] with pride.<br/><br/>"));
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public void applyEffects() {
+			Main.sex.clearLubrication(Main.sex.getCharacterPerformingAction(),SexAreaOrifice.MOUTH);
+		}
+	};
+	
+	public static final SexAction PLAYER_ENABLE_POWER_BOTTOM = new SexAction(
+			SexActionType.SPECIAL,
+			ArousalIncrease.ONE_MINIMUM,
+			ArousalIncrease.ONE_MINIMUM,
+			CorruptionLevel.ZERO_PURE,
+			null,
+			SexParticipantType.NORMAL) {
+		
+		@Override
+		public String getActionTitle() {
+			return "Power bottom";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return "Raise your level of control, allowing you to initiate any sex actions.";
+		}
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())!=SexControl.FULL
+					&& Main.sex.isDom(target)
+					&& Main.sex.isConsensual()
+					&& !Main.sex.isMasturbation()
+					&& Main.sex.getCharacterPerformingAction().isPlayer();
+		}
+
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			UtilText.nodeContentSB.append("[npc.speech(I won't let you do all the work,)] you declare to [npc2.name].<br/><br/>"
+					+ "<i style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>You now have an elevated level of control, and can initiate any sex actions.</i>");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public void applyEffects() {
+			GameCharacter target = Main.sex.getCharacterPerformingAction();
+			Main.sex.setForcedSexControl(target, SexControl.FULL);
+		}
+	};
+	
+	public static final SexAction PLAYER_DISABLE_POWER_BOTTOM = new SexAction(
+			SexActionType.SPECIAL,
+			ArousalIncrease.ONE_MINIMUM,
+			ArousalIncrease.ONE_MINIMUM,
+			CorruptionLevel.ZERO_PURE,
+			null,
+			SexParticipantType.NORMAL) {
+		
+		@Override
+		public String getActionTitle() {
+			return "Passive bottom";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return "Restrict your level of control, preventing you from initiating any non-self penetrative actions, while simultaneously restoring your dom's.";
+		}
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
+					&& Main.sex.isDom(target)
+					&& Main.sex.isConsensual()
+					&& !Main.sex.isMasturbation()
+					&& Main.sex.getCharacterPerformingAction().isPlayer();
+		}
+
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			UtilText.nodeContentSB.append("[npc.speech(Use me however you like!)] you beg to [npc2.name].<br/><br/>"
+					+ "<i style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>You now have a restricted level of control, and cannot initiate any non-self penetrative actions. In addition, [npc2.name]'s control is fully elevated.</i>");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public void applyEffects() {
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			Main.sex.setForcedSexControl(Main.sex.getCharacterPerformingAction(), SexControl.ONGOING_PLUS_LIMITED_PENETRATIONS);
+			Main.sex.setForcedSexControl(target, SexControl.FULL);
+//			Main.sex.setCharacterAllowedToUseSelfActions(target, false);
+			Main.sex.setCanRemoveSelfClothing(target, true);
+			Main.sex.setCanRemoveOthersClothing(target, true);
+			Main.sex.removeCharacterForbiddenByOthersFromPositioning(Main.sex.getCharacterTargetedForSexAction(this));
+			for(GameCharacter participant : Main.sex.getAllParticipants()) {
+				if(!participant.equals(target) && Main.sex.getSexPositionSlot(participant)!=SexSlotGeneric.MISC_WATCHING) {
+					((NPC)target).generateSexChoices(false, participant, null);
+				}
+			}	
+		}
+	};
+
+	public static final SexAction PLAYER_FULL_SERVICE = new SexAction(
+			SexActionType.SPECIAL,
+			ArousalIncrease.ONE_MINIMUM,
+			ArousalIncrease.ONE_MINIMUM,
+			CorruptionLevel.ZERO_PURE,
+			null,
+			SexParticipantType.NORMAL) {
+		
+		@Override
+		public String getActionTitle() {
+			return "Full service";
+		}
+
+		@Override
+		public String getActionDescription() {
+			return "Simultaneously raise your level of control, allowing you to initiate any sex actions, as well as fully restrict your dom.";
+		}
+
+		@Override
+		public boolean isBaseRequirementsMet() {
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			
+			return Main.sex.isDom(target)
+					&& Main.sex.isConsensual()
+					&& !Main.sex.isMasturbation()
+					&& Main.sex.getCharacterPerformingAction().isPlayer();
+		}
+
+		@Override
+		public String getDescription() {
+			UtilText.nodeContentSB.setLength(0);
+			
+			UtilText.nodeContentSB.append("[npc.speech(Just relax and let me service you,)] you instruct [npc2.name].<br/><br/>"
+					+ "<i style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>You now have an elevated level of control, and can initiate any sex actions. In addition, [npc2.name]'s control is fully restricted.</i>");
+			
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public void applyEffects() {
+			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
+			Main.sex.setForcedSexControl(Main.sex.getCharacterPerformingAction(), SexControl.FULL);
+			Main.sex.stopAllOngoingActions(target, Main.sex.getCharacterTargetedForSexAction(this));
+			Main.sex.setCharacterAllowedToUseSelfActions(target, false);
+			Main.sex.setForcedSexControl(target, SexControl.ONGOING_ONLY);
+			Main.sex.addCharacterForbiddenByOthersFromPositioning(target);
+			Main.sex.setCanRemoveSelfClothing(target, false);
+			Main.sex.setCanRemoveOthersClothing(target, false);
+		}
+	};
+	
 	public static final SexAction PLAYER_FORBID_PARTNER_SELF = new SexAction(
 			SexActionType.SPECIAL,
 			ArousalIncrease.ONE_MINIMUM,
@@ -1154,7 +1355,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.isCharacterAllowedToUseSelfActions(Main.sex.getCharacterTargetedForSexAction(this))
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1233,7 +1434,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& !Main.sex.isCharacterAllowedToUseSelfActions(Main.sex.getCharacterTargetedForSexAction(this))
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1274,7 +1475,6 @@ public class GenericActions {
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 			
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& !Main.sex.isDom(target)
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.getSexControl(target).getValue()>=SexControl.ONGOING_PLUS_LIMITED_PENETRATIONS.getValue()
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1320,7 +1520,6 @@ public class GenericActions {
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 			
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& !Main.sex.isDom(target)
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.getSexControl(target).getValue()<SexControl.ONGOING_PLUS_LIMITED_PENETRATIONS.getValue()
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1371,7 +1570,7 @@ public class GenericActions {
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 			
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(target)!=SexControl.FULL || !Main.sex.isDom(target))
+					&& Main.sex.getSexControl(target)!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& !Main.sex.isCharacterForbiddenByOthersFromPositioning(target)
 					&& Main.sex.getCharacterPerformingAction().isPlayer()
@@ -1419,7 +1618,7 @@ public class GenericActions {
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 			
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(target)!=SexControl.FULL || !Main.sex.isDom(target))
+					&& Main.sex.getSexControl(target)!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.isCharacterForbiddenByOthersFromPositioning(target)
 					&& Main.sex.getCharacterPerformingAction().isPlayer()
@@ -1465,7 +1664,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.isCanRemoveOthersClothing(Main.sex.getCharacterTargetedForSexAction(this), null)
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1504,7 +1703,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& !Main.sex.isCanRemoveOthersClothing(Main.sex.getCharacterTargetedForSexAction(this), null)
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1543,7 +1742,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& Main.sex.isCanRemoveSelfClothing(Main.sex.getCharacterTargetedForSexAction(this))
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
@@ -1582,7 +1781,7 @@ public class GenericActions {
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return Main.sex.getSexControl(Main.sex.getCharacterPerformingAction())==SexControl.FULL
-					&& (Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL || !Main.sex.isDom(Main.sex.getCharacterTargetedForSexAction(this)))
+					&& Main.sex.getSexControl(Main.sex.getCharacterTargetedForSexAction(this))!=SexControl.FULL
 					&& !Main.sex.isMasturbation()
 					&& !Main.sex.isCanRemoveSelfClothing(Main.sex.getCharacterTargetedForSexAction(this))
 					&& Main.sex.getCharacterPerformingAction().isPlayer();
