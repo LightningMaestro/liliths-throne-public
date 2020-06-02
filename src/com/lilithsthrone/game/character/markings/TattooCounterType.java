@@ -15,7 +15,7 @@ import com.lilithsthrone.utils.Units;
 
 /**
  * @since 0.2.6
- * @version 0.2.10
+ * @version 0.3.7.2
  * @author Innoxia
  */
 public enum TattooCounterType {
@@ -24,6 +24,14 @@ public enum TattooCounterType {
 		@Override
 		public int getCount(GameCharacter bearer) {
 			return 0;
+		}
+	},
+
+	
+	VALUE_AS_SLAVE("value as slave", "Displays how much the bearer is worth as a slave.") {
+		@Override
+		public int getCount(GameCharacter bearer) {
+			return bearer.getValueAsSlave(false); 
 		}
 	},
 	
@@ -262,6 +270,40 @@ public enum TattooCounterType {
 			return count; 
 		}
 	},
+	
+	VIRGINITIES_TAKEN_PENIS("penile deflowerments", "Keeps a count of how many penile virginities the bearer has taken.") {
+		@Override
+		public int getCount(GameCharacter bearer) {
+			int count = 0;
+			
+			for(GameCharacter character : Main.game.getAllNPCs()) {
+				if(!character.equals(bearer)) {
+					for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
+						if(orifice.isInternalOrifice()
+								&& character.getVirginityLoss(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, orifice))!=null
+								&& character.getVirginityLoss(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, orifice)).getKey().equals(bearer.getId())) {
+							count++;
+							break;
+						}
+					}
+				}
+			}
+			
+			GameCharacter character = Main.game.getPlayer();
+			if(!character.equals(bearer)) {
+				for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
+					if(orifice.isInternalOrifice()
+							&& character.getVirginityLoss(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, orifice))!=null
+							&& character.getVirginityLoss(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, orifice)).getKey().equals(bearer.getId())) {
+						count++;
+						break;
+					}
+				}
+			}
+			
+			return count; 
+		}
+	},
 
 	CURRENT_PREGNANCY("litter size", "Counts how many children the bearer is currently pregnant with.") {
 		@Override
@@ -278,6 +320,17 @@ public enum TattooCounterType {
 		public int getCount(GameCharacter bearer) {
 			int count = 0;
 			for(Litter litter : bearer.getLittersBirthed()) {
+				count+=litter.getTotalLitterCount();
+			}
+			return count;
+		}
+	},
+
+	OFFSPRING_FATHERED("offspring fathered", "Counts how many children the bearer has fathered.") {
+		@Override
+		public int getCount(GameCharacter bearer) {
+			int count = 0;
+			for(Litter litter : bearer.getLittersFathered()) {
 				count+=litter.getTotalLitterCount();
 			}
 			return count;
@@ -338,13 +391,6 @@ public enum TattooCounterType {
 			}
 		}
 	},
-	
-	VALUE_AS_SLAVE("value as slave", "Displays how much the bearer is worth as a slave.") {
-		@Override
-		public int getCount(GameCharacter bearer) {
-			return bearer.getValueAsSlave(false); 
-		}
-	}
 	;
 	
 	private String name;

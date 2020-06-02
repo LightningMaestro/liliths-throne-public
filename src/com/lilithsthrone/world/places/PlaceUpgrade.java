@@ -501,22 +501,55 @@ public enum PlaceUpgrade {
 			0.4f,
 			null),
 	
+	LILAYA_SLAVE_ROOM_DOG_BOWLS(false,
+			PresetColour.GENERIC_BAD,
+			"Dog Bowls",
+			"Have meals served to this room's occupants in dog bowls placed upon the floor."
+					+ " Being forced to eat in such a humiliating fashion is sure to make your slaves dislike you, but it will also serve to emphasise the fact that they're nothing more than your property.",
+			"Metal dog bowls have been placed upon the floor in this room, and it's from out of these that this room's occupants are made to eat their meals."
+					+ " Being forced to eat in such a humiliating fashion is making your slaves dislike you, but it is also serving to emphasise the fact that they're nothing more than your property.",
+			"A series of metal dog bowls have been placed in one corner of the room, and it's from out of these that this room's occupants are expected to eat and drink."
+					+ " Being forced to get down on all fours and eat their meals like a dog is making your slaves dislike you, but at the same time, it's hammering home the fact that they're nothing more than your property...",
+			100,
+			0,
+			10,
+			0,
+			-0.2f,
+			0.25f,
+			null) {
+		@Override
+		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
+			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_SLAVE_ROOM_ROOM_SERVICE)) {
+				return new Value<>(false, "The 'Room Service' upgrade must be removed before the 'Dog Bowls' can be used.");
+			}
+			return super.getExtraConditionalAvailability(cell);
+		}
+	},
+	
 	LILAYA_SLAVE_ROOM_ROOM_SERVICE(false,
 			PresetColour.GENERIC_ARCANE,
-			"Room service",
+			"Room Service",
 			"You could offer this room's occupant unlimited room service."
 					+ " This isn't exactly how most owners treat their slaves, and while it's sure to make the occupant like you more, it's also going to cost quite a bit in upkeep, as well as have some negative effects on their obedience...",
-			"You've offered unlimited room service to the occupant of this room."
-					+ " It's definitely making them like you more, but it's also costing a fair amount in upkeep, and is having a negative effect on your slave's obedience...",
-			"A little push-trolley with a few empty silver plates and glasses stacked on top of it is evidence that the slave who lives here is taking full advantage of the unlimited room service you've offered to them."
-					+ " It's definitely making them like you more, but having such a luxury available to them is also having a negative impact on their obedience, not to mention the damage it's doing to your bank account...",
-			100,
+			"You've offered unlimited room service to the occupants of this room."
+					+ " It's definitely making them like you more, but it's also costing a fair amount in upkeep, and is having a negative effect on your slaves' obedience...",
+			"A little push-trolley with a few empty silver plates and glasses stacked on top of it is evidence that the slaves who live here are taking full advantage of the unlimited room service you've offered to them."
+					+ " It's definitely making them like you more, but having such a luxury available to them is also having a negative impact on their obedience, not to mention the damage it's doing to your finances...",
+			500,
 			0,
 			250,
 			0,
 			0.4f,
 			-0.2f,
-			null),
+			null) {
+		@Override
+		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
+			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_SLAVE_ROOM_DOG_BOWLS)) {
+				return new Value<>(false, "The 'Dog Bowls' upgrade must be removed before the 'Room Service' can be used.");
+			}
+			return super.getExtraConditionalAvailability(cell);
+		}
+	},
 	
 	LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS(false,
 			PresetColour.GENERIC_ARCANE,
@@ -807,24 +840,47 @@ public enum PlaceUpgrade {
 		}
 	},
 
-	LILAYA_PLAYER_ROOM_BATH(false,
-			PresetColour.BASE_BLUE_LIGHT,
-			"Bathroom Extension",
-			"By knocking through into an adjacent storage room, it would be possible to greatly extend the size of your bathroom."
-					+ " With this extra space, you could turn it into a private spa, installing not only a huge new bathtub, but also a sauna and self-contained steam room.",
-			"By knocking through into an adjacent storage room, you have greatly extended the size of your bathroom."
-					+ " With this extra space, you've turned it into a private spa, having installed not only a huge new bathtub, but also a sauna and self-contained steam room.",
-			"By knocking through into an adjacent storage room, your old bathroom has been greatly extended and converted into a private spa."
-					+ " A massive bathtub, able to hold at least ten people at once, stretches across the entire right-hand side of the room, while to the left, both an enclosed sauna and a self-contained steam room have been constructed.",
+	LILAYA_SPA(true,
+			PresetColour.BASE_AQUA,
+			"Spa",
+			"By completely stripping and repurposing this room, it would be possible to transform it into a private spa."
+					+ " While it would no doubt make an excellent addition to the mansion, the installation of a huge, pool-like bath, sauna, and steam room is going to be extremely expensive..."
+					+ "<br/>[style.italicsbad(Only one spa can be installed, so make sure that you want it in this tile before installing it!)]",
+			"This room has been completely renovated and transformed into a luxurious, private spa."
+					+ " In the middle of the marble floor, there's huge, pool-like bath, while behind a trio of doors set into the left-hand wall, there's a changing room, sauna, and steam room.",
+			"This room has been completely renovated and transformed into a luxurious, private spa."
+					+ " In the middle of the marble floor, there's huge, pool-like bath, which is easily large enough to hold a dozen people at once."
+					+ " Behind a trio of doors set into the left-hand wall, there's also a changing room, sauna, and steam room.",
 			300000,
-			100000,
+			0,
+			250,
 			0,
 			0,
-			0.5f,
-			-0.25f,
+			0,
 			null) {
-		public Value<Boolean, String> getAvailability(Cell cell) {
-			return new Value<>(true, "");
+		@Override
+		public boolean isSlaverUpgrade() {
+			return false;
+		}
+		@Override
+		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
+			if(!Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCells(LILAYA_SPA).isEmpty()
+					|| !Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_FIRST_FLOOR).getCells(LILAYA_SPA).isEmpty()) {
+				return new Value<>(false, "You can only have one spa!");
+			}
+			if(!Main.game.getCharactersTreatingCellAsHome(cell).isEmpty()) {
+				return new Value<>(false, "This room needs to be unoccupied in order to purchase this modification.");
+			}
+			return super.getExtraConditionalAvailability(cell);
+		}
+		@Override
+		public void applyInstallationEffects(Cell c) {
+			GenericPlace place = c.getPlace();
+			for(PlaceUpgrade upgrade : PlaceUpgrade.values()) {
+				if(upgrade != LILAYA_SPA) {
+					place.removePlaceUpgrade(c, upgrade);
+				}
+			}
 		}
 	},
 	;
@@ -837,6 +893,7 @@ public enum PlaceUpgrade {
 	private static ArrayList<PlaceUpgrade> slaveQuartersUpgradesQuadruple;
 	private static ArrayList<PlaceUpgrade> milkingRoomUpgrades;
 	private static ArrayList<PlaceUpgrade> officeUpgrades;
+	private static ArrayList<PlaceUpgrade> spaUpgrades;
 	
 	public static ArrayList<PlaceUpgrade> getCoreRoomUpgrades() {
 		return coreRoomUpgrades;
@@ -865,10 +922,16 @@ public enum PlaceUpgrade {
 	public static ArrayList<PlaceUpgrade> getOfficeUpgrades() {
 		return officeUpgrades;
 	}
+
+	public static ArrayList<PlaceUpgrade> getSpaUpgrades() {
+		return spaUpgrades;
+	}
+	
 	
 	static {
 		coreRoomUpgrades = Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_GUEST_ROOM,
+//				PlaceUpgrade.LILAYA_SPA, //TODO
 				
 				PlaceUpgrade.LILAYA_SLAVE_ROOM,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOUBLE,
@@ -885,6 +948,7 @@ public enum PlaceUpgrade {
 				
 		slaveQuartersUpgradesSingle = Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
@@ -899,6 +963,7 @@ public enum PlaceUpgrade {
 		
 		slaveQuartersUpgradesDouble = Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
@@ -912,6 +977,7 @@ public enum PlaceUpgrade {
 		
 		slaveQuartersUpgradesQuadruple = Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
@@ -937,6 +1003,9 @@ public enum PlaceUpgrade {
 				PlaceUpgrade.LILAYA_OFFICE_COFFEE_MACHINE,
 				PlaceUpgrade.LILAYA_OFFICE_PARTITIONING_WALLS,
 				
+				PlaceUpgrade.LILAYA_EMPTY_ROOM);
+		
+		spaUpgrades = Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
 	}
 	

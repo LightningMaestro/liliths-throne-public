@@ -3,7 +3,9 @@ package com.lilithsthrone.game.sex.sexActions.baseActionsMisc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -47,7 +49,34 @@ public class GenericActions {
 	
 	private static String quickSexDescription = "";
 
+	private static SexType getPlayerOngoingMainSex(GameCharacter partner) {
+		for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry1 : Main.sex.getOngoingActionsMap(Main.game.getPlayer()).entrySet()) {
+			// If penetrating an internal orifice, prefer that:
+			if(entry1.getValue().containsKey(partner)
+					&& entry1.getKey().isPenetration()
+					&& ((SexAreaPenetration)entry1.getKey()).isTakesVirginity()
+					&& entry1.getValue().get(partner).stream().anyMatch(orifice -> orifice.isOrifice() && ((SexAreaOrifice)orifice).isInternalOrifice())) {
+				return new SexType(SexParticipantType.NORMAL, entry1.getKey(), entry1.getValue().get(partner).stream().filter(orifice -> orifice.isOrifice() && ((SexAreaOrifice)orifice).isInternalOrifice()).findFirst().get());
+
+			// If being penetrated, prefer that:
+			} else if(entry1.getValue().containsKey(partner)
+					&& entry1.getKey().isOrifice()
+					&& ((SexAreaOrifice)entry1.getKey()).isInternalOrifice()
+					&& entry1.getValue().get(partner).stream().anyMatch(penetration -> penetration.isPenetration() && ((SexAreaPenetration)penetration).isTakesVirginity())) {
+				return new SexType(SexParticipantType.NORMAL, entry1.getKey(), entry1.getValue().get(partner).stream().filter(penetration -> penetration.isPenetration() && ((SexAreaPenetration)penetration).isTakesVirginity()).findFirst().get());
+			}
+		}
+		return null;
+	}
+	
 	private static SexType getForeplayPreference(GameCharacter dom, GameCharacter sub) {
+		if(dom.isPlayer()) {
+			SexType playerMainSexType = getPlayerOngoingMainSex(sub);
+			if(playerMainSexType!=null) {
+				return playerMainSexType;	
+			}
+		}
+		
 		SexType preference = Main.sex.getForeplayPreference(dom, sub);
 		List<SexAreaInterface> domBanned = Main.sex.getInitialSexManager().getAreasBannedMap().get(dom);
 		if(domBanned==null) {
@@ -88,6 +117,13 @@ public class GenericActions {
 	}
 	
 	private static SexType getMainSexPreference(GameCharacter dom, GameCharacter sub) {
+		if(dom.isPlayer()) {
+			SexType playerMainSexType = getPlayerOngoingMainSex(sub);
+			if(playerMainSexType!=null) {
+				return playerMainSexType;	
+			}
+		}
+		
 		SexType preference = Main.sex.getMainSexPreference(dom, sub);
 		List<SexAreaInterface> domBanned = Main.sex.getInitialSexManager().getAreasBannedMap().get(dom);
 		if(domBanned==null) {
@@ -583,8 +619,8 @@ public class GenericActions {
 			} else {
 				Main.sex.getCharacterTargetedForSexAction(this).setTesticleSize(TesticleSize.THREE_LARGE);
 			}
-			if(Main.sex.getCharacterTargetedForSexAction(this).getPenisGirth().getValue() < PenetrationGirth.THREE_THICK.getValue()) {
-				sb.append(Main.sex.getCharacterTargetedForSexAction(this).setPenisGirth(PenetrationGirth.THREE_THICK));
+			if(Main.sex.getCharacterTargetedForSexAction(this).getPenisGirth().getValue() < PenetrationGirth.FOUR_THICK.getValue()) {
+				sb.append(Main.sex.getCharacterTargetedForSexAction(this).setPenisGirth(PenetrationGirth.FOUR_THICK));
 			}
 			if(Main.sex.getCharacterTargetedForSexAction(this).getPenisRawSizeValue() < 20) {
 				sb.append(Main.sex.getCharacterTargetedForSexAction(this).setPenisSize(20));
@@ -612,23 +648,23 @@ public class GenericActions {
 			CorruptionLevel.THREE_DIRTY,
 			null,
 			SexParticipantType.NORMAL) {
-		
+		@Override
+		public Colour getHighlightColour() {
+			return PresetColour.PSYCHOACTIVE;
+		}
 		@Override
 		public String getActionTitle() {
-			return "[style.colourPsychoactive(Calming suggestion)]";
+			return "Calming suggestion";
 		}
-
 		@Override
 		public String getActionDescription() {
 			return "[npc2.Name] is under the effect of a psychoactive substance. Use this to your advantage and hypnotically suggest that [npc2.she] doesn't like having sex with you.";
 		}
-
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return !Main.sex.getCharacterTargetedForSexAction(this).getPsychoactiveFluidsIngested().isEmpty()
 					&& (Main.sex.getCharacterPerformingAction().isPlayer() || (Main.sex.getCharacterTargetedForSexAction(this).getLust()>25 && Main.sex.getCharacterPerformingAction().hasFetish(Fetish.FETISH_NON_CON_DOM)));
 		}
-
 		@Override
 		public String getDescription() {
 			return "<p>"
@@ -651,7 +687,6 @@ public class GenericActions {
 							+ " [npc2.speech(Wait, w-why is this happening?! Please, stop it! Get away from me!)]")
 					+ "</p>";
 		}
-
 		@Override
 		public void applyEffects() {
 			Main.sex.getCharacterTargetedForSexAction(this).incrementLust(-50, false);
@@ -665,23 +700,23 @@ public class GenericActions {
 			CorruptionLevel.THREE_DIRTY,
 			null,
 			SexParticipantType.NORMAL) {
-		
+		@Override
+		public Colour getHighlightColour() {
+			return PresetColour.PSYCHOACTIVE;
+		}
 		@Override
 		public String getActionTitle() {
-			return "[style.colourPsychoactive(Lustful suggestion)]";
+			return "Lustful suggestion";
 		}
-
 		@Override
 		public String getActionDescription() {
 			return "[npc2.Name] is under the effect of a psychoactive substance. Use this to your advantage and hypnotically suggest that [npc2.she] loves to have sex with you.";
 		}
-
 		@Override
 		public boolean isBaseRequirementsMet() {
 			return !Main.sex.getCharacterTargetedForSexAction(this).getPsychoactiveFluidsIngested().isEmpty()
 					&& (Main.sex.getCharacterPerformingAction().isPlayer() || (Main.sex.getCharacterTargetedForSexAction(this).getLust()<75 && !Main.sex.getCharacterPerformingAction().hasFetish(Fetish.FETISH_NON_CON_DOM)));
 		}
-
 		@Override
 		public String getDescription() {
 			StringBuilder sb = new StringBuilder();
@@ -725,7 +760,6 @@ public class GenericActions {
 			
 			return sb.toString();
 		}
-
 		@Override
 		public void applyEffects() {
 			Main.sex.getCharacterTargetedForSexAction(this).incrementLust(50, false);

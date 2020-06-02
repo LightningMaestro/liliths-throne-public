@@ -53,7 +53,7 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.combat.Spell;
+import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -262,7 +262,7 @@ public class Helena extends NPC {
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_piercing_nose_ring", PresetColour.CLOTHING_GOLD, false), true, this);
 			
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_neck_velvet_choker", PresetColour.CLOTHING_BLACK, false), true, this);
-			this.equipClothingFromNowhere(AbstractClothingType.generateClothing(ClothingType.EYES_AVIATORS, PresetColour.CLOTHING_GOLD, false), true, this);
+			this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_eye_aviators", PresetColour.CLOTHING_GOLD, false), true, this);
 
 			this.equipClothingFromNowhere(AbstractClothingType.generateClothing("innoxia_groin_lacy_thong", PresetColour.CLOTHING_BLACK, false), true, this);
 			
@@ -286,6 +286,11 @@ public class Helena extends NPC {
 	
 	@Override
 	public boolean isUnique() {
+		return true;
+	}
+	
+	@Override
+	public boolean isAbleToBeImpregnated() {
 		return true;
 	}
 	
@@ -394,28 +399,28 @@ public class Helena extends NPC {
 		if(gift instanceof AbstractItem) {
 			AbstractItemType type = ((AbstractItem)gift).getItemType();
 			if(type.equals(ItemType.GIFT_CHOCOLATES)) {
-				text =  UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_CHOCOLATES")
+				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_CHOCOLATES")
 						+(applyEffects
-								?Main.game.getNpc(Nyan.class).incrementAffection(Main.game.getPlayer(), 5)
+								?this.incrementAffection(Main.game.getPlayer(), 5)
 								:"");
 				
 			} else if(type.equals(ItemType.GIFT_PERFUME)) {
-				text =  UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_PERFUME")
-					+(applyEffects
-							?Main.game.getNpc(Nyan.class).incrementAffection(Main.game.getPlayer(), 5)
-							:"");
+				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_PERFUME")
+						+(applyEffects
+								?this.incrementAffection(Main.game.getPlayer(), 5)
+								:"");
 				
 			} else if(type.equals(ItemType.GIFT_ROSE_BOUQUET)) {
-				text =  UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_ROSES")
-					+(applyEffects
-							?Main.game.getNpc(Nyan.class).incrementAffection(Main.game.getPlayer(), 10)
-							:"");
+				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_ROSES")
+						+(applyEffects
+								?this.incrementAffection(Main.game.getPlayer(), 10)
+								:"");
 				
 			} else if(type.equals(ItemType.GIFT_TEDDY_BEAR)) {
-				text =  UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_TEDDY_BEAR")
-					+(applyEffects
-							?Main.game.getNpc(Nyan.class).incrementAffection(Main.game.getPlayer(), -5)
-							:"");
+				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_TEDDY_BEAR")
+						+(applyEffects
+								?this.incrementAffection(Main.game.getPlayer(), -5)
+								:"");
 			}
 			
 		} else if(gift instanceof AbstractClothing) {
@@ -423,7 +428,7 @@ public class Helena extends NPC {
 			if(type.equals(ClothingType.getClothingTypeFromId("innoxia_hair_rose"))) {
 				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_SINGLE_ROSE")
 						+(applyEffects
-								?Main.game.getNpc(Nyan.class).incrementAffection(Main.game.getPlayer(), 5)
+								?this.incrementAffection(Main.game.getPlayer(), 5)
 								:"");
 					
 			}
@@ -447,7 +452,7 @@ public class Helena extends NPC {
 	}
 	
 	public boolean isSlutty() {
-		return !this.isVaginaVirgin() || this.hasFetish(Fetish.FETISH_LUSTY_MAIDEN);
+		return !this.isVaginaVirgin() || !this.isAssVirgin();
 	}
 	
 	public void applySlut() {
