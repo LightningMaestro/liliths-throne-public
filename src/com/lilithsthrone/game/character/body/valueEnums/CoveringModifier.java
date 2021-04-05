@@ -4,7 +4,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 
 /**
  * @since 0.1.99
- * @version 0.1.99
+ * @version 0.4
  * @author Innoxia
  */
 public enum CoveringModifier {
@@ -19,6 +19,7 @@ public enum CoveringModifier {
 
 	BLAZING("blazing"),
 	SHIMMERING("shimmering"),
+	GLITTERING("glittering"),
 	SWIRLING("swirling"),
 	
 	GOOEY("gooey") {
@@ -31,9 +32,16 @@ public enum CoveringModifier {
 		}
 	},
 	
+	// Generic:
+	SMOOTH("smooth"),
+	ROUGH("rough"),
+	
+	//Skin:
+	LEATHERY("leathery"),
+	
+	// Fur/hair:
 	SHORT("short"),
 	SILKEN("silken"),
-	SMOOTH("smooth"),
 	FLUFFY("fluffy"),
 	SHAGGY("shaggy"),
 	FURRY("fur-like"),

@@ -60,19 +60,9 @@ public enum CoverableArea {
 			Util.newArrayListOfValues(
 					InventorySlot.LEG,
 					InventorySlot.SOCK)) {
-		public boolean isPhysicallyAvailable(GameCharacter owner) {
-			switch(owner.getLegConfiguration()) {
-				case ARACHNID:
-				case BIPEDAL:
-				case CEPHALOPOD:
-				case TAUR:
-					return true;
-				case TAIL:
-				case TAIL_LONG:
-					return false;
-			}
-			return true;
-		}
+//		public boolean isPhysicallyAvailable(GameCharacter owner) {
+//			return owner.hasLegs();
+//		}
 	},
 	
 	FEET(false,
@@ -82,7 +72,7 @@ public enum CoverableArea {
 					InventorySlot.ANKLE,
 					InventorySlot.SOCK)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
-			return LEGS.isPhysicallyAvailable(owner);
+			return owner.hasLegs();
 		}
 	},
 	
@@ -90,15 +80,25 @@ public enum CoverableArea {
 			"thighs",
 			Util.newArrayListOfValues(
 					InventorySlot.LEG,
-					InventorySlot.SOCK)) {
+					InventorySlot.GROIN)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
-			return LEGS.isPhysicallyAvailable(owner);
+			return owner.hasLegs();
+		}
+	},
+	
+	TAIL(false,
+			"tail",
+			Util.newArrayListOfValues(
+					InventorySlot.TAIL)) {
+		public boolean isPhysicallyAvailable(GameCharacter owner) {
+			return owner.hasTail();
 		}
 	},
 	
 	VAGINA(true,
 			"pussy",
 			Util.newArrayListOfValues(
+					InventorySlot.VAGINA,
 					InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
@@ -119,6 +119,7 @@ public enum CoverableArea {
 	PENIS(true,
 			"cock",
 			Util.newArrayListOfValues(
+					InventorySlot.PENIS,
 					InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
@@ -192,7 +193,7 @@ public enum CoverableArea {
 					InventorySlot.HORNS,
 					InventorySlot.HEAD)),
 	
-	MOUTH(false,
+	MOUTH(true,
 			"mouth",
 			Util.newArrayListOfValues(
 					InventorySlot.HAIR,
@@ -208,7 +209,7 @@ public enum CoverableArea {
 	private List<InventorySlot> associatedInventorySlots;
 
 	private CoverableArea(boolean saveDiscoveredStatus, String name, List<InventorySlot> associatedInventorySlots) {
-		this.saveDiscoveredStatus = saveDiscoveredStatus;
+		setSaveDiscoveredStatus(saveDiscoveredStatus);
 		this.name = name;
 		this.associatedInventorySlots = associatedInventorySlots;
 	}
