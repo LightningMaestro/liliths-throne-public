@@ -65,6 +65,11 @@ src>com.lilithsthrone.game.character.body.valueEnums>OrificeElasticity.java
 	ZERO_UNYIELDING("rigid", 0, 0.025f, 0, PresetColour.GENERIC_SIZE_ONE),
 into
 	ZERO_UNYIELDING("rigid", 0, 0.00025f, 0, PresetColour.GENERIC_SIZE_ONE),
+and
+src>com.lilithsthrone.game.sex>Sex.java
+			float minimumStretchPercentage = 0.05f;
+into
+			float minimumStretchPercentage = 0.00025f;
 
 No Magical Pull Out Request (Vaginal Pull Out No-Creampie Request Not Always Accepted)
 
@@ -108,19 +113,19 @@ insert
 		@Override
 		public String getActionDescription() {
 			if(!isRealPenisFuckingCharacter(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this))) {
-				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull [npc2.her] dildo out of you as [npc2.she] [npc2.verb(orgasm)], but make it obvious you want it inside.";
+				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull [npc2.her] dildo out of you as [npc2.she] [npc2.verb(orgasm)], though you can't help but want it inside.";
 				
 			} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.MOUTH)) {
-				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, but make it obvious you want it inside.";
+				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, though you can't help but want it inside.";
 
 			} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
-				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, but make it obvious you want it inside.";
+				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, though you can't help but want it inside.";
 				
 			} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
-				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, but make it obvious you want it inside.";
+				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, though you can't help but want it inside.";
 				
 			} else {
-				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, but make it obvious you want it inside.";
+				return "You can feel that [npc2.name] is fast approaching [npc2.her] orgasm. Ask [npc2.herHim] to pull out before [npc2.she] cums, though you can't help but want it inside.";
 			}
 		}
 
@@ -149,49 +154,49 @@ insert
 				if(!isRealPenisFuckingCharacter(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this))) {
 					if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.pussy+], but the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.pussy+], but [npc.her] heart isn't in it, and the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.ANUS)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.asshole+], but the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.asshole+], but [npc.her] heart isn't in it, and the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.NIPPLE)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.nipple+], but the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.nipple+], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to get away from [npc.her] [npc.breasts+], but the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to get away from [npc.her] [npc.breasts+], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to get away from [npc.her] [npc.feet+], but the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to get away from [npc.her] [npc.feet+], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.herHim] as [npc2.she] [npc2.verb(orgasm)], but the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.herHim] as [npc2.she] [npc2.verb(orgasm)], but [npc.her] heart isn't in it, and the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
 					}
 	
 				} else {
 					if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.pussy+] before [npc2.she] [npc2.verb(cum)], but the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.pussy+] before [npc2.she] [npc2.verb(cum)], but [npc.her] heart isn't in it, and the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.ANUS)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.asshole+] before [npc2.she] [npc2.verb(cum)], but the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.asshole+] before [npc2.she] [npc2.verb(cum)], but [npc.her] heart isn't in it, and the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.NIPPLE)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.nipple+] before [npc2.she] [npc2.verb(cum)], but the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull out of [npc.her] [npc.nipple+] before [npc2.she] [npc2.verb(cum)], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull away from [npc.her] [npc.breasts+] before [npc2.she] [npc2.verb(cum)], but the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull away from [npc.her] [npc.breasts+] before [npc2.she] [npc2.verb(cum)], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
 						return "Although not able to speak,"
-								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull away from [npc.her] [npc.feet+] before [npc2.she] [npc2.verb(cum)], but the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
+								+ " [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.verb(want)] [npc2.name] to pull away from [npc.her] [npc.feet+] before [npc2.she] [npc2.verb(cum)], but [npc.her] heart isn't in it, and the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else {
 						return "Although not able to speak, [npc.name] [npc.verb(manage)] to use a series of pleading whines in order to convey that [npc.she] [npc.do]n't [npc.verb(want)] [npc2.namePos] cum, but the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eye reveal the truth.";
@@ -204,121 +209,121 @@ insert
 							|| isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_VAGINA)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo out of me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_PENIS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo out of me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.ANUS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo out of me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.NIPPLE)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo out of me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo away from me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+"[npc.speech(Pull out! Get that dildo away from me!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to cry out around [npc2.namePos] [npc2.cock], "
 								+ "[npc.speech(Pull out! Get that dildo out of my mouth!)]"
-								+" However, [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
 					}
 					
 				} else if(Main.sex.getCharacterTargetedForSexAction(this).isWearingCondom()) {
 					if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! I don't want to risk that condom breaking in my pussy!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_VAGINA)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! I don't want to risk that condom breaking!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_PENIS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! I don't want to risk that condom breaking!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.ANUS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! I don't want that condom breaking in my ass!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.NIPPLE)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! I don't want that condom breaking in my nipple!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Get back! I don't want that condom breaking all over my tits!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Get back! I don't want that condom breaking all over my [npc.feet]!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to cry out around [npc2.namePos] [npc2.cock], "
 								+ "[npc.speech(Pull out! Please!)]"
-								+" However, [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
 					}
 					
 				} else {
 					if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
-								+ "[npc.speech(Pull out! I don't want to get pregnant!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+ "[npc.speech(Pull out! I don't want to get pregna~ant!)]"
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_VAGINA)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! Don't cum in me, please!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.URETHRA_PENIS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! Don't cum in me, please!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.ANUS)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! Don't cum in my ass, please!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] hips and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.NIPPLE)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Pull out! Don't cum in my nipple! Don't do it!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaOrifice.BREAST)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Get back! Don't cum on my tits! Don't you dare!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.breasts+] and the eager look in [npc.her] eyes reveal the truth.";
 	
 					} else if(isAreaFuckedByTarget(this, Main.sex.getCharacterPerformingAction(), SexAreaPenetration.FOOT)) {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to formulate a sentence as [npc.she] [npc.verb(cry)] out to [npc2.name], "
 								+ "[npc.speech(Get back! Don't cum on my [npc.feet]! Don't you dare!)]"
-								+" However, [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the trembling of [npc.her] [npc.feet+] and the eager look in [npc.her] eyes reveal the truth.";
 						
 					} else {
 						return "Through [npc.her] desperate moans and lewd cries, [npc.name] somehow [npc.verb(manage)] to cry out around [npc2.namePos] [npc2.cock], "
 								+ "[npc.speech(Pull out! I don't want to taste your cum!)]"
-								+" However, [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
+								+" However, [npc.her] heart isn't in it, and [npc.her] tone of voice, the eager sucking, the trembling of [npc.her] body and the eager look in [npc.her] eyes reveal the truth.";
 					}
 				}
 			}
@@ -463,7 +468,7 @@ insert
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
 			
-			UtilText.nodeContentSB.append("[npc.speech(Use me however you like!)] you beg to [npc2.name].<br/><br/>"
+			UtilText.nodeContentSB.append("[npc.speech(Please, use me however you like!)] you beg to [npc2.name].<br/><br/>"
 					+ "<i style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>You now have a restricted level of control, and cannot initiate any non-self penetrative actions. In addition, [npc2.name]'s control is fully elevated.</i>");
 			
 			return UtilText.nodeContentSB.toString();
@@ -951,12 +956,42 @@ insert
 before
 	public static final SexAction COCK_SLAP = new SexAction(
 
+Larger Inventory
+
+src>com.lilithsthrone.rendering>RenderingEngine.java
+	public static final int ITEMS_PER_PAGE = 24;
+into
+	public static final int ITEMS_PER_PAGE = 81;
+and
+src>com.lilithsthrone.res.css>webView_StyleSheet.css
+.inventory-item-slot {
+	display:inline-block;
+	background-color: #333333;
+	position:relative;
+	float:left;
+	border-radius: 5px;
+	width:14.66%;
+	margin:1%;
+	-webkit-box-sizing: border-box;
+}
+into
+.inventory-item-slot {
+	display:inline-block;
+	background-color: #333333;
+	position:relative;
+	float:left;
+	border-radius: 5px;
+	width:10.11%;
+	margin:0.5%;
+	-webkit-box-sizing: border-box;
+}
+
 Hypotheticals
 
-Youko Transformation (Allow Youko Use of the Transform Menu) [Race modding not happening until later]
+Youko Transformation (Allow Youko Use of the Transform Menu) [Race modding not happening until later] [Seems to be vanilla? Or maybe that's Angel]
+
+Zenko Race (Angel/Youko Hybrid, 'Holy' Youko Equivalent w/ tail system) [Will not be a coremod]
 
 Sensitivity Fetish (Replace player/npc check for sensitivity with a fetish check changeable per NPC)
 
 Physique Tier Based Orgasms (Replace 1/20 Physique Extra Orgasms with 1 per tier instead)
-
-

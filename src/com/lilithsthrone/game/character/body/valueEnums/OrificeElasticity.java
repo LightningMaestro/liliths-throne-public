@@ -15,7 +15,7 @@ public enum OrificeElasticity {
 	/*-------RIGID:---------*/
 
 	/**Is extremely resistant to being stretched out.*/
-	ZERO_UNYIELDING("rigid", 0, 0.025f, 0, false, PresetColour.GENERIC_SIZE_ONE),
+	ZERO_UNYIELDING("rigid", 0, 0.00025f, 0, false, PresetColour.GENERIC_SIZE_ONE),
 	
 	/**Is very resistant to being stretched out.*/
 	ONE_RIGID("stiff", 1, 0.05f, 0.05f, false, PresetColour.GENERIC_SIZE_TWO),

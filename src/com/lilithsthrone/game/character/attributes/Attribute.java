@@ -263,14 +263,14 @@ public class Attribute {
 		}
 	};
 	
-	public static AbstractAttribute FERTILITY = new AbstractAttribute(true, 10, -100, 100, "fertility", "Fertility", "shieldIcon", PresetColour.GENERIC_SEX, "fertility", "infertility", null) {
+	public static AbstractAttribute FERTILITY = new AbstractAttribute(true, 10, -100, 200, "fertility", "Fertility", "shieldIcon", PresetColour.GENERIC_SEX, "fertility", "infertility", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases the likelihood of becoming pregnant.";
 		}
 	};
 	
-	public static AbstractAttribute VIRILITY = new AbstractAttribute(true, 10, -100, 100, "virility", "Virility", "shieldIcon", PresetColour.GENERIC_SEX, "virility", "sterility", null) {
+	public static AbstractAttribute VIRILITY = new AbstractAttribute(true, 10, -100, 200, "virility", "Virility", "shieldIcon", PresetColour.GENERIC_SEX, "virility", "sterility", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases the likelihood of impregnating someone.";

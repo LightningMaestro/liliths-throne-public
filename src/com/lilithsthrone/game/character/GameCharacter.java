@@ -7106,7 +7106,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public int getOrgasmsBeforeSatisfied() {
-		int increment = 0;
+		int increment = (int) (getAttributeValue(Attribute.MAJOR_PHYSIQUE)/20);
 		if(Main.game.isInSex()) {
 			for(GameCharacter character : Main.sex.getAllParticipants()) {
 				if(!character.equals(this) && character.hasPerkAnywhereInTree(Perk.OBJECT_OF_DESIRE)) {
@@ -18858,7 +18858,11 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public void incrementArousal(float increment) {
-		setArousal(getArousal() + increment);
+		if(this.isPlayer()) {
+			setArousal(getArousal() + increment*4);
+		} else {
+			setArousal(getArousal() + increment*2/3);
+		}	
 	}
 	
 	public float getLust() {

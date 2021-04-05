@@ -3765,7 +3765,7 @@ public class Sex {
 				}
 			}
 			
-			float minimumStretchPercentage = 0.05f;
+			float minimumStretchPercentage = 0.00025f;
 			
 			knotted = false;
 			float totalPenetratingDiameter = 0;
